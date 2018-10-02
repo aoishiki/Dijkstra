@@ -1,3 +1,9 @@
+/** datãƒ•ã‚¡ã‚¤ãƒ«ã®å½¢å¼
+	å ´æ‰€ç•ªå·, xåº§æ¨™, yåº§æ¨™,äº¤å·®ç‚¹ã®ä½ç½®,ç¹‹ãŒã£ã¦ã„ã‚‹äº¤å·®ç‚¹ã®æ•°,ç¹‹ãŒã£ã¦ã„ã‚‹äº¤å·®ç‚¹ã®ç•ªå·
+	ã¨ã„ã†å½¢å¼ã§1ç•ªã‹ã‚‰é †ã«æ”¹è¡Œã—ã¦è¨˜è¿°ã—ã¦ã„ã‚‹
+*/
+
+
 #include <stdio.h>
 #include <math.h>
 #include "que.h"
@@ -8,20 +14,20 @@
 
 int st_point[point_max] = { 0 };
 
-// À•W
+// ï¿½ï¿½ï¿½W
 typedef struct coordinate {
 	double x, y;
 }coordinate;
 
 typedef struct location {
-	int this_point_num;//Œğ·“_”Ô†
+	int this_point_num;//ï¿½ï¿½_ï¿½Ôï¿½
 	coordinate p;
-	char name[30];//Œğ·“_–¼
+	char name[30];//ï¿½ï¿½_ï¿½ï¿½
 
-	int lpnum;//‚Â‚È‚ª‚Á‚Ä‚¢‚éŒğ·“_‚Ì”
-	int link_point[lpmax]; //‚Â‚È‚ª‚Á‚Ä‚¢‚éŒğ·“_”Ô†
-	double route_dist;	//ƒXƒ^[ƒg‚©‚ç‚±‚Ì“_‚ÉŠ‚éÅ’Z‚Ì‹——£
-	int back_point; //‚±‚Ì’n“_‚ÉŠ‚éŒğ·“_”Ô†
+	int lpnum;//ï¿½Â‚È‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_ï¿½Ìï¿½
+	int link_point[lpmax]; //ï¿½Â‚È‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_ï¿½Ôï¿½
+	double route_dist;	//ï¿½Xï¿½^ï¿½[ï¿½gï¿½ï¿½ï¿½ç‚±ï¿½Ì“_ï¿½Éï¿½ï¿½ï¿½Å’Zï¿½Ì‹ï¿½ï¿½ï¿½
+	int back_point; //ï¿½ï¿½ï¿½Ì’nï¿½_ï¿½Éï¿½ï¿½ï¿½ï¿½_ï¿½Ôï¿½
 }Location;
 Location point[point_max];
 
@@ -41,7 +47,7 @@ void read_data(char *filename) {
 			fscanf(fp, ", %d", &point[i].link_point[j]);
 		}
 
-		// ‹——£‚Ì‰Šú‰»
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 		point[i].route_dist = inf;
 		point[i].back_point = 0;
 
@@ -67,7 +73,7 @@ void set_dist(int current_point) {
 	int i,j,sp;
 	int q_search[qmax] = { 0 };
 
-	// ‚Â‚È‚ª‚Á‚Ä‚¢‚éŒğ·“_‚ğ‚·‚×‚Ä’²‚×‚é‚Ì‚Åpush‚·‚é
+	// ï¿½Â‚È‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½×‚Ä’ï¿½ï¿½×‚ï¿½Ì‚ï¿½pushï¿½ï¿½ï¿½ï¿½
 	for (i = 0; i < point[current_point].lpnum; i++) {
 		int lp = point[current_point].link_point[i];
 		if(ischeck(lp) == false)
@@ -75,17 +81,17 @@ void set_dist(int current_point) {
 	}
 	
 	for (;;) {
-		sp = q_pop(q_search);								// Œ»İ‚ÌŒğ·“_‚ÆÚ‘±‚µ‚Ä‚¢‚éŒğ·“_
-		coordinate xy_p = point[sp].p;						// Ú‘±‚µ‚Ä‚¢‚éŒğ·“_‚ÌÀ•W
-		coordinate xy_p_cur = point[current_point].p;		// Œ»İQÆ‚µ‚Ä‚¢‚éŒğ·“_‚ÌÀ•W
-		double p_dist = dist(xy_p_cur, xy_p);				// Ú‘±‚µ‚½Œğ·“_‚ÆŒ»İ‚ÌŒğ·“_‚Ì‹——£
+		sp = q_pop(q_search);								// ï¿½ï¿½ï¿½İ‚ÌŒï¿½_ï¿½ÆÚ‘ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_
+		coordinate xy_p = point[sp].p;						// ï¿½Ú‘ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_ï¿½Ìï¿½ï¿½W
+		coordinate xy_p_cur = point[current_point].p;		// ï¿½ï¿½ï¿½İQï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_ï¿½Ìï¿½ï¿½W
+		double p_dist = dist(xy_p_cur, xy_p);				// ï¿½Ú‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ÆŒï¿½ï¿½İ‚ÌŒï¿½_ï¿½Ì‹ï¿½ï¿½ï¿½
 
-		// ‚æ‚è¬‚³‚¢Œo˜Hp_dist‚Å‚ ‚ê‚Î‚»‚Á‚¿‚ğ‘ã“ü‚·‚é
+		// ï¿½ï¿½è¬ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Hp_distï¿½Å‚ï¿½ï¿½ï¿½Î‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (point[sp].route_dist > p_dist) {
 			/*
-			* Œ»İQÆ‚µ‚Ä‚¢‚éŒğ·“_‚ªƒXƒ^[ƒg’n“_‚È‚ç
-			* ‹——£‚Íp_dist‚¾‚ª‚»‚êˆÈŠO‚Í‚»‚±‚Ü‚Å‚ÌŒo˜H‚Ì’·‚³
-			* point[search_point].route_dist‚ğ‰ÁZ‚µ‚½‹——£‚É‚È‚é
+			* ï¿½ï¿½ï¿½İQï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Xï¿½^ï¿½[ï¿½gï¿½nï¿½_ï¿½È‚ï¿½
+			* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½p_distï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÈŠOï¿½Í‚ï¿½ï¿½ï¿½ï¿½Ü‚Å‚ÌŒoï¿½Hï¿½Ì’ï¿½ï¿½ï¿½
+			* point[search_point].route_distï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚È‚ï¿½
 			*/
 			point[sp].route_dist = p_dist;
 			point[sp].back_point = point[current_point].this_point_num;
@@ -105,23 +111,23 @@ int main(void) {
 	read_data("./map.dat");
 	
 	int st_p, go_p,i,j;
-	int q_point[qmax] = { 0 };		//’Tõ‘Ò‚¿‚ÌŒğ·“_”Ô†
+	int q_point[qmax] = { 0 };		//ï¿½Tï¿½ï¿½ï¿½Ò‚ï¿½ï¿½ÌŒï¿½_ï¿½Ôï¿½
 
 	printf("start & goal >>");
 	scanf("%d %d",&st_p,&go_p);
 	
-	// ŒŸõ“_‰Šú‰»
-	int search_point = st_p;	//’Tõ’†‚ÌŒğ·“_”Ô†
+	// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int search_point = st_p;	//ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½_ï¿½Ôï¿½
 	point[search_point].route_dist = 0;
 
 	do {
-		//Å’ZŒo˜H‚ğŒŸõ
+		//ï¿½Å’Zï¿½oï¿½Hï¿½ï¿½ï¿½
 		if (search_point != go_p) {
 
 			set_dist(search_point);
 
-			//d‚İ‚ğ‚Â‚¯‚¨‚í‚Á‚½‚çŸ‚ÉQÆ‚·‚é“_‚ğqueue‚Épush
-			//“¯‚¶“_‚ªŠÜ‚Ü‚ê‚Ä‚¢‚È‚¯‚ê‚Îpush
+			//ï¿½dï¿½İ‚ï¿½Â‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çŸï¿½ÉQï¿½Æ‚ï¿½ï¿½ï¿½_ï¿½ï¿½queueï¿½ï¿½push
+			//ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Ü‚Ü‚ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½push
 			for (i = 0; i < point[search_point].lpnum; i++) {
 				int lp = point[search_point].link_point[i];
 				if(isContents(q_point,lp) == false)
@@ -132,7 +138,7 @@ int main(void) {
 				continue;
 		}
 		else {
-			// Å’ZŒo˜H‚ğo—Í
+			// ï¿½Å’Zï¿½oï¿½Hï¿½ï¿½oï¿½ï¿½
 			while (search_point != st_p) {
 				printf("%d <-", search_point);
 				search_point = point[search_point].back_point;
